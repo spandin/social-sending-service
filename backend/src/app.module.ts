@@ -4,6 +4,9 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { HttpModule } from '@nestjs/axios';
 
 import { PingService } from './ping/ping.service';
+import { TelegramController } from './telegram/telegram.controller';
+import { TelegramService } from './telegram/telegram.service';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -13,6 +16,7 @@ import { PingService } from './ping/ping.service';
       isGlobal: true,
     }),
     ScheduleModule.forRoot(),
+    TelegramModule,
   ],
   providers: [PingService],
 })
