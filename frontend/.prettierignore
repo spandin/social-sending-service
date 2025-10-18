@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+.next
+.nuxt
+.vuepress/dist
+.serverless
+.fusebox
+.dynamodb
+.tern-port
+vite.config.ts.timestamp-*
+vite.config.ts.timestamp-*
+
