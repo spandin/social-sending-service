@@ -37,8 +37,8 @@ export class TelegramService {
         if (mediaGroup.length > 0) {
           // Если текст есть и подходит под caption, добавим его в первый элемент mediaGroup
           if (hasText && text.trim().length <= this.CAPTION_LIMIT) {
-            mediaGroup[0].caption = text.trim();
-            mediaGroup[0].parse_mode = 'MarkdownV2';
+            mediaGroup[0].caption = this.cleanText(text.trim());
+            mediaGroup[0].parse_mode = 'HTML';
             // Отправляем медиа с caption
             await this.telegram.sendMediaGroup(this.chatId, mediaGroup);
             // Текст уже отправлен в caption, больше отправлять не нужно
@@ -106,8 +106,7 @@ export class TelegramService {
     const parts = this.splitText(text, this.TELEGRAM_MESSAGE_LIMIT);
 
     for (const part of parts) {
-      // Отправляем с Markdown-разметкой и поддержкой emoji
-      await this.telegram.sendMessage(this.chatId, part, { parse_mode: 'MarkdownV2' });
+      await this.telegram.sendMessage(this.chatId, part, { parse_mode: 'HTML' });
     }
   }
 
@@ -135,5 +134,9 @@ export class TelegramService {
     }
 
     return result;
+  }
+
+  private cleanText(text: string): string {
+    return text.replace(/<br\s*\/?>/gi, '\n');
   }
 }
