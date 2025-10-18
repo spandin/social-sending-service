@@ -116,10 +116,10 @@ export class TelegramService {
     while (text.length > limit) {
       let sliceIndex = limit;
 
-      // Пытаемся разорвать по пробелу или переносу строки
-      const lastSpace = text.lastIndexOf(' ', limit);
+      // Пытаемся разорвать по точке или переносу строки
+      const lastDot = text.lastIndexOf('.', limit);
       const lastNewline = text.lastIndexOf('\n', limit);
-      const breakPoint = Math.max(lastSpace, lastNewline);
+      const breakPoint = Math.max(lastDot, lastNewline);
 
       if (breakPoint > 0) {
         sliceIndex = breakPoint;
